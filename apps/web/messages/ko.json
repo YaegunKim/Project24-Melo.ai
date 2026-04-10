@@ -1,0 +1,118 @@
+{
+  "nav": {
+    "history": "히스토리",
+    "settings": "설정"
+  },
+  "landing": {
+    "title": "Melo.ai",
+    "tagline": "음악이 당신을 치유합니다",
+    "description": "생체 데이터와 음악치료 원리를 결합하여\n당신만을 위한 치료 음악을 생성합니다",
+    "cta": "세션 시작하기",
+    "features": {
+      "bio": {
+        "title": "생체 데이터 분석",
+        "description": "심박수, 스트레스, 수면 질을 분석하여 현재 상태를 파악합니다"
+      },
+      "therapy": {
+        "title": "음악치료 원리",
+        "description": "ISO Principle과 Entrainment 원리를 적용해 치료적 음악을 설계합니다"
+      },
+      "ai": {
+        "title": "AI 음악 생성",
+        "description": "MusicGPT가 당신만을 위한 맞춤형 음악을 실시간으로 생성합니다"
+      }
+    }
+  },
+  "input": {
+    "title": "지금 어떠신가요?",
+    "subtitle": "생체 데이터를 입력하면 최적의 치료 음악을 생성합니다",
+    "tabs": {
+      "manual": "직접 입력",
+      "camera": "카메라 측정",
+      "wearable": "웨어러블"
+    },
+    "fields": {
+      "heartRate": "심박수 (BPM)",
+      "stress": "스트레스 수준",
+      "sleep": "수면 질",
+      "mood": "현재 기분",
+      "energy": "에너지 레벨"
+    },
+    "moods": {
+      "anxious": "😰 불안",
+      "tired": "😴 피곤",
+      "sad": "😢 슬픔",
+      "neutral": "😐 보통",
+      "happy": "😊 행복",
+      "energetic": "⚡ 활기"
+    },
+    "camera": {
+      "title": "카메라로 심박수 측정",
+      "description": "카메라를 향해 이마를 가까이 대주세요.\n30초간 측정합니다.",
+      "comingSoon": "Coming Soon"
+    },
+    "wearable": {
+      "title": "웨어러블 기기 연결",
+      "description": "Bluetooth 기기에서 심박수 데이터를 자동으로 수신합니다.",
+      "comingSoon": "Coming Soon"
+    }
+  },
+  "goals": {
+    "title": "오늘의 목표",
+    "relax": "이완",
+    "focus": "집중",
+    "sleep": "수면 유도",
+    "energize": "에너지 충전",
+    "release": "감정 해소",
+    "relax_desc": "스트레스 해소, 긴장 완화",
+    "focus_desc": "집중력 향상, 업무 효율",
+    "sleep_desc": "숙면 유도, 긴장 이완",
+    "energize_desc": "활력 충전, 기분 전환",
+    "release_desc": "감정 표현, 카타르시스",
+    "relax_icon": "🌊",
+    "focus_icon": "🎯",
+    "sleep_icon": "🌙",
+    "energize_icon": "⚡",
+    "release_icon": "🎭"
+  },
+  "generate": {
+    "button": "음악 생성하기",
+    "loading": "치료 음악 생성 중...",
+    "subtitle": "AI가 당신을 위한 음악을 만들고 있습니다",
+    "rationale_label": "치료 원리"
+  },
+  "player": {
+    "title": "당신의 치료 음악",
+    "play": "재생",
+    "pause": "일시정지",
+    "therapy_info": "치료 정보",
+    "bpm_start": "시작 BPM",
+    "bpm_target": "목표 BPM",
+    "key": "조성",
+    "style": "스타일",
+    "rate_title": "이 음악이 도움이 되었나요?",
+    "save": "히스토리에 저장",
+    "new_session": "새 세션 시작"
+  },
+  "history": {
+    "title": "세션 히스토리",
+    "empty": "아직 세션이 없습니다",
+    "empty_desc": "첫 번째 음악 치료 세션을 시작해 보세요",
+    "start_session": "세션 시작하기",
+    "play_again": "다시 듣기",
+    "goals": {
+      "relax": "이완",
+      "focus": "집중",
+      "sleep": "수면",
+      "energize": "에너지",
+      "release": "감정 해소"
+    }
+  },
+  "common": {
+    "back": "뒤로",
+    "next": "다음",
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다",
+    "retry": "다시 시도"
+  }
+}

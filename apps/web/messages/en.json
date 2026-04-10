@@ -1,0 +1,118 @@
+{
+  "nav": {
+    "history": "History",
+    "settings": "Settings"
+  },
+  "landing": {
+    "title": "Melo.ai",
+    "tagline": "Music That Heals You",
+    "description": "Combining biometric data with music therapy principles\nto generate therapeutic music personalized for you",
+    "cta": "Start Session",
+    "features": {
+      "bio": {
+        "title": "Biometric Analysis",
+        "description": "Analyzes your heart rate, stress, and sleep quality to understand your current state"
+      },
+      "therapy": {
+        "title": "Music Therapy Principles",
+        "description": "Applies ISO Principle and Entrainment to design therapeutic music"
+      },
+      "ai": {
+        "title": "AI Music Generation",
+        "description": "MusicGPT generates personalized therapeutic music in real-time for you"
+      }
+    }
+  },
+  "input": {
+    "title": "How are you feeling?",
+    "subtitle": "Enter your biometric data to generate the perfect therapeutic music",
+    "tabs": {
+      "manual": "Manual Input",
+      "camera": "Camera Scan",
+      "wearable": "Wearable"
+    },
+    "fields": {
+      "heartRate": "Heart Rate (BPM)",
+      "stress": "Stress Level",
+      "sleep": "Sleep Quality",
+      "mood": "Current Mood",
+      "energy": "Energy Level"
+    },
+    "moods": {
+      "anxious": "😰 Anxious",
+      "tired": "😴 Tired",
+      "sad": "😢 Sad",
+      "neutral": "😐 Neutral",
+      "happy": "😊 Happy",
+      "energetic": "⚡ Energetic"
+    },
+    "camera": {
+      "title": "Measure Heart Rate via Camera",
+      "description": "Point your forehead at the camera.\nMeasurement takes 30 seconds.",
+      "comingSoon": "Coming Soon"
+    },
+    "wearable": {
+      "title": "Connect Wearable Device",
+      "description": "Automatically receives heart rate data from your Bluetooth device.",
+      "comingSoon": "Coming Soon"
+    }
+  },
+  "goals": {
+    "title": "Today's Goal",
+    "relax": "Relax",
+    "focus": "Focus",
+    "sleep": "Sleep",
+    "energize": "Energize",
+    "release": "Release",
+    "relax_desc": "Stress relief, tension release",
+    "focus_desc": "Boost concentration, work efficiency",
+    "sleep_desc": "Induce sleep, ease tension",
+    "energize_desc": "Recharge energy, mood boost",
+    "release_desc": "Emotional expression, catharsis",
+    "relax_icon": "🌊",
+    "focus_icon": "🎯",
+    "sleep_icon": "🌙",
+    "energize_icon": "⚡",
+    "release_icon": "🎭"
+  },
+  "generate": {
+    "button": "Generate Music",
+    "loading": "Generating therapeutic music...",
+    "subtitle": "AI is composing your personalized music",
+    "rationale_label": "Therapy Rationale"
+  },
+  "player": {
+    "title": "Your Therapeutic Music",
+    "play": "Play",
+    "pause": "Pause",
+    "therapy_info": "Therapy Info",
+    "bpm_start": "Start BPM",
+    "bpm_target": "Target BPM",
+    "key": "Key",
+    "style": "Style",
+    "rate_title": "Did this music help you?",
+    "save": "Save to History",
+    "new_session": "New Session"
+  },
+  "history": {
+    "title": "Session History",
+    "empty": "No sessions yet",
+    "empty_desc": "Start your first music therapy session",
+    "start_session": "Start Session",
+    "play_again": "Play Again",
+    "goals": {
+      "relax": "Relax",
+      "focus": "Focus",
+      "sleep": "Sleep",
+      "energize": "Energize",
+      "release": "Release"
+    }
+  },
+  "common": {
+    "back": "Back",
+    "next": "Next",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry"
+  }
+}
