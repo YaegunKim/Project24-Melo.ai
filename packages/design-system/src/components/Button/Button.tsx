@@ -1,12 +1,12 @@
 'use client';
 
-import React from 'react';
+import { type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { S } from './Button.style';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function Button({ variant = 'primary', size = 'md', children, ...props }: ButtonProps) {
