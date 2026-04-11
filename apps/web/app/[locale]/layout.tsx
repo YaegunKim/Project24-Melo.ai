@@ -9,7 +9,7 @@ interface LocaleLayoutProps {
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  const { locale } = await params;
+  const { locale } = params;
   
 
   if (!routing.locales.includes(locale as 'ko' | 'en')) {
