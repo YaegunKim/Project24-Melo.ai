@@ -4,6 +4,11 @@ import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import { colors, typography, media } from '@melo/design-system';
 
+const shimmer = keyframes`
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 0.7; transform: scaleY(1); }
+`;
+
 const fadeUp = keyframes`
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
@@ -40,6 +45,8 @@ export const S = {
     font-size: ${typography.fontSize.sm};
     font-family: ${typography.fontFamily.sans};
     transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
     &:hover { color: ${colors.text.primary}; border-color: ${colors.brand.primary}; }
   `,
 
@@ -50,17 +57,19 @@ export const S = {
   `,
 
   AlbumArt: styled.div`
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 24px;
+    width: 88px;
+    height: 88px;
+    border-radius: 16px;
     background: linear-gradient(135deg, #1C1C35 0%, #2A1A4A 40%, #1A2A4A 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 5rem;
-    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    margin: 0 auto 1.5rem;
+    flex-shrink: 0;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 8px 32px rgba(155, 139, 244, 0.25);
 
     &::after {
       content: '';
@@ -71,17 +80,43 @@ export const S = {
     }
   `,
 
-  WaveformContainer: styled.div`
+  WaveformWrapper: styled.div`
+    position: relative;
     margin-bottom: 1.5rem;
     background: ${colors.bg.card};
-    border-radius: 12px;
-    padding: 1rem;
+    border-radius: 16px;
     border: 1px solid ${colors.border.subtle};
-    min-height: 80px;
+    overflow: hidden;
+    min-height: 128px;
+    display: flex;
+    align-items: center;
+  `,
+
+  WaveformContainer: styled.div<{ $visible: boolean }>`
+    width: 100%;
+    padding: 1rem 1.25rem;
+    opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+    transition: opacity 0.4s ease;
+  `,
+
+  WaveformSkeleton: styled.div`
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    gap: 3px;
+    padding: 1rem 1.25rem;
+  `,
+
+  SkeletonBar: styled.div<{ $delay: number; $height: number }>`
+    flex: 1;
+    height: ${({ $height }) => $height}%;
+    max-height: 80%;
+    background: ${colors.border.subtle};
+    border-radius: 2px;
+    animation: ${shimmer} 1.6s ease-in-out infinite;
+    animation-delay: ${({ $delay }) => $delay}s;
   `,
 
   Controls: styled.div`
@@ -116,7 +151,7 @@ export const S = {
     justify-content: space-between;
     font-size: ${typography.fontSize.xs};
     color: ${colors.text.muted};
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     padding: 0 0.25rem;
   `,
 

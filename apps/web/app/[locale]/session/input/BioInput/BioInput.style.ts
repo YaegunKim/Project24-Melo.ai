@@ -32,6 +32,8 @@ export const S = {
     padding: 0.5rem 0.75rem;
     font-size: ${typography.fontSize.sm};
     font-family: ${typography.fontFamily.sans};
+    white-space: nowrap;
+    flex-shrink: 0;
     transition: all 0.2s;
     &:hover { color: ${colors.text.primary}; border-color: ${colors.brand.primary}; }
   `,

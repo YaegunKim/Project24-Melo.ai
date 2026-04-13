@@ -37,6 +37,8 @@ export const S = {
     font-size: ${typography.fontSize.sm};
     font-family: ${typography.fontFamily.sans};
     transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
     &:hover { color: ${colors.text.primary}; border-color: ${colors.brand.primary}; }
   `,
 
@@ -127,6 +129,9 @@ export const S = {
     font-weight: ${typography.fontWeight.semibold};
     color: ${colors.text.primary};
     margin-bottom: 0.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   `,
 
   CardMeta: styled.div`
@@ -134,7 +139,8 @@ export const S = {
     color: ${colors.text.muted};
     display: flex;
     align-items: center;
-    gap: 0.625rem;
+    flex-wrap: wrap;
+    gap: 0.375rem 0.625rem;
   `,
 
   Stars: styled.span`

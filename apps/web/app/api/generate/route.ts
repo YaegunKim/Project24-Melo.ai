@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+interface MusicGPTInitResponse {
+  success: boolean;
+  message?: string;
+  task_id: string;
+  conversion_id_1: string;
+  conversion_id_2: string;
+  eta: number;
+  credit_estimate: number;
+}
+
 export async function POST(request: NextRequest) {
   const body = await request.json() as { prompt: string; duration: number; format?: string };
   const { prompt, duration } = body;
@@ -7,14 +17,13 @@ export async function POST(request: NextRequest) {
   const apiUrl = process.env.MUSICGPT_API_URL;
   const apiKey = process.env.MUSICGPT_API_KEY;
 
-  // API 미설정 시 개발용 placeholder 반환
   if (!apiUrl || !apiKey) {
-    // 실제 환경에서는 제거하고 아래 API 호출 코드를 사용하세요
-    await new Promise((r) => setTimeout(r, 2000)); // 생성 시뮬레이션
+    await new Promise((r) => setTimeout(r, 2000));
     return NextResponse.json({
-      audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
       taskId: `mock-${Date.now()}`,
-      status: 'completed',
+      conversionId: `mock-conv-${Date.now()}`,
+      eta: 0,
+      status: 'mock',
     });
   }
 
@@ -24,16 +33,32 @@ export async function POST(request: NextRequest) {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
-      body: JSON.stringify({ prompt, duration }),
+      body: JSON.stringify({
+        prompt,
+        make_instrumental: true,
+        output_length: duration,
+      }),
     });
 
     if (!res.ok) {
-      throw new Error(`MusicGPT API error: ${res.status}`);
+      const errText = await res.text();
+      console.error('[/api/generate] MusicGPT error:', res.status, errText);
+      return NextResponse.json(
+        { error: 'Failed to initiate music generation', detail: errText, musicgptStatus: res.status },
+        { status: 502 }
+      );
     }
 
-    const data = await res.json();
-    return NextResponse.json(data);
+    const data = await res.json() as MusicGPTInitResponse;
+
+    return NextResponse.json({
+      taskId: data.task_id,
+      conversionId: data.conversion_id_1,
+      eta: data.eta,
+      status: 'pending',
+    });
   } catch (err) {
     console.error('[/api/generate]', err);
     return NextResponse.json({ error: 'Failed to generate music' }, { status: 500 });

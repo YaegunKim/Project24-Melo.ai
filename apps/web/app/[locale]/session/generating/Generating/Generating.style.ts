@@ -125,4 +125,36 @@ export const S = {
     color: ${colors.text.muted};
     margin-top: 0.25rem;
   `,
+
+  ProgressBar: styled.div`
+    width: 100%;
+    max-width: 480px;
+    height: 6px;
+    background: ${colors.bg.card};
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 0 1rem;
+  `,
+
+  ProgressFill: styled.div<{ $progress: number }>`
+    height: 100%;
+    width: ${({ $progress }) => $progress}%;
+    background: ${colors.brand.gradient};
+    border-radius: 3px;
+    transition: width 1s linear;
+  `,
+
+  EtaText: styled.p`
+    font-size: ${typography.fontSize.sm};
+    color: ${colors.text.muted};
+    margin: 0 0 2.5rem;
+  `,
+
+  ReadyText: styled.p`
+    font-size: ${typography.fontSize.base};
+    color: ${colors.brand.secondary};
+    font-weight: ${typography.fontWeight.semibold};
+    margin: 0 0 2.5rem;
+    animation: ${pulse} 1.5s ease-in-out infinite;
+  `,
 };

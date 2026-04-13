@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { buildMusicPrompt, generateMusic } from '@melo/core';
@@ -16,8 +16,32 @@ export function Generating() {
   const router = useRouter();
 
   const { therapyParams, setAudioUrl, goal } = useSessionStore();
+  const hasStarted = useRef(false);
+
+  const [etaTotal, setEtaTotal] = useState<number | null>(null);
+  const [elapsed, setElapsed] = useState(0);
+
+  // ETA 카운트다운 인터벌
+  useEffect(() => {
+    if (etaTotal === null) return;
+
+    const interval = setInterval(() => {
+      setElapsed((prev) => {
+        if (prev >= etaTotal) {
+          clearInterval(interval);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [etaTotal]);
 
   useEffect(() => {
+    if (hasStarted.current) return;
+    hasStarted.current = true;
+
     if (!therapyParams) {
       router.replace(`/${locale}/session/input`);
       return;
@@ -25,7 +49,10 @@ export function Generating() {
 
     const prompt = buildMusicPrompt(therapyParams);
 
-    generateMusic({ prompt, duration: therapyParams.duration, format: 'mp3' })
+    generateMusic(
+      { prompt, duration: therapyParams.duration, format: 'mp3' },
+      (eta) => setEtaTotal(eta * 2),
+    )
       .then((res) => {
         setAudioUrl(res.audioUrl);
         router.push(`/${locale}/session/player`);
@@ -37,6 +64,10 @@ export function Generating() {
 
   if (!therapyParams) return null;
 
+  const progress = etaTotal !== null ? Math.min((elapsed / etaTotal) * 100, 100) : 0;
+  const isReady = etaTotal !== null && elapsed >= etaTotal;
+  const remaining = etaTotal !== null ? Math.max(etaTotal - elapsed, 0) : null;
+
   return (
     <S.Page>
       <S.WaveContainer>
@@ -46,7 +77,19 @@ export function Generating() {
       </S.WaveContainer>
 
       <S.LoadingText>{t('loading')}</S.LoadingText>
-      <S.Subtitle>{t('subtitle')}</S.Subtitle>
+
+      {isReady ? (
+        <S.ReadyText>음악이 생성되었습니다! 잠시만 기다려주세요!</S.ReadyText>
+      ) : etaTotal !== null ? (
+        <>
+          <S.ProgressBar>
+            <S.ProgressFill $progress={progress} />
+          </S.ProgressBar>
+          <S.EtaText>약 {remaining}초 후에 완성됩니다</S.EtaText>
+        </>
+      ) : (
+        <S.Subtitle>{t('subtitle')}</S.Subtitle>
+      )}
 
       <S.RationaleCard>
         <S.RationaleLabel>💡 {t('rationale_label')}</S.RationaleLabel>

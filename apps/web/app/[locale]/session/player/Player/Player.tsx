@@ -22,11 +22,11 @@ export function Player() {
   const { audioUrl, therapyParams, bioInput, goal, reset } = useSessionStore();
   const { addSession } = useHistoryStore();
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const wavesurferRef = useRef<import('wavesurfer.js').default | null>(null);
   const waveformRef = useRef<HTMLDivElement>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isWaveformReady, setIsWaveformReady] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [rating, setRating] = useState(0);
@@ -38,27 +38,37 @@ export function Player() {
       return;
     }
 
-    let ws: import('wavesurfer.js').default;
+    let destroyed = false;
 
     (async () => {
       const WaveSurfer = (await import('wavesurfer.js')).default;
 
-      if (!waveformRef.current) return;
+      if (destroyed || !waveformRef.current) return;
 
-      ws = WaveSurfer.create({
+      const ws = WaveSurfer.create({
         container: waveformRef.current,
         waveColor: '#9B8BF4',
         progressColor: '#4ECDC4',
         url: audioUrl,
-        height: 64,
+        height: 96,
         barWidth: 3,
         barGap: 2,
         barRadius: 3,
         normalize: true,
+        interact: true,
       });
 
-      ws.on('ready', () => setDuration(ws.getDuration()));
-      ws.on('timeupdate', (t) => setCurrentTime(t));
+      if (destroyed) {
+        ws.destroy();
+        return;
+      }
+
+      ws.on('ready', () => {
+        setDuration(ws.getDuration());
+        setIsWaveformReady(true);
+      });
+      ws.on('audioprocess', (time) => setCurrentTime(time));
+      ws.on('timeupdate', (time) => setCurrentTime(time));
       ws.on('play', () => setIsPlaying(true));
       ws.on('pause', () => setIsPlaying(false));
       ws.on('finish', () => setIsPlaying(false));
@@ -67,7 +77,9 @@ export function Player() {
     })();
 
     return () => {
-      ws?.destroy();
+      destroyed = true;
+      wavesurferRef.current?.destroy();
+      wavesurferRef.current = null;
     };
   }, [audioUrl]);
 
@@ -96,19 +108,28 @@ export function Player() {
       </S.Header>
 
       <S.AlbumArt>🎵</S.AlbumArt>
-
-      <S.WaveformContainer ref={waveformRef} />
-
-      <S.Controls>
-        <S.PlayButton onClick={togglePlay} aria-label={isPlaying ? t('pause') : t('play')}>
-          {isPlaying ? '⏸' : '▶'}
-        </S.PlayButton>
-      </S.Controls>
-
+      
       <S.TimeRow>
         <span>{formatTime(currentTime)}</span>
         <span>{duration > 0 ? formatTime(duration) : '--:--'}</span>
       </S.TimeRow>
+
+      <S.WaveformWrapper>
+        {!isWaveformReady && (
+          <S.WaveformSkeleton>
+            {Array.from({ length: 40 }, (_, i) => (
+              <S.SkeletonBar key={i} $delay={(i * 0.05) % 1} $height={20 + Math.sin(i * 0.8) * 40 + 40} />
+            ))}
+          </S.WaveformSkeleton>
+        )}
+        <S.WaveformContainer ref={waveformRef} $visible={isWaveformReady} />
+      </S.WaveformWrapper>
+
+      <S.Controls>
+        <S.PlayButton onClick={togglePlay} disabled={!isWaveformReady} aria-label={isPlaying ? t('pause') : t('play')}>
+          {isPlaying ? '⏸' : '▶'}
+        </S.PlayButton>
+      </S.Controls>
 
       <S.TherapyCard>
         <S.TherapyTitle>🧠 {t('therapy_info')}</S.TherapyTitle>
