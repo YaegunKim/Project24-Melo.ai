@@ -26,7 +26,7 @@ export function Landing() {
   return (
     <S.Page>
       <S.Nav>
-        <S.NavLogo>Melo.ai</S.NavLogo>
+        <S.NavLogo>Percuro.ai</S.NavLogo>
         <S.NavActions>
           <S.NavLink onClick={() => router.push(`/${locale}/history`)}>
             {tNav('history')}
