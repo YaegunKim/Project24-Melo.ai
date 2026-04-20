@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { buildMusicPrompt, generateMusic } from '@melo/core';
+import { buildMusicPrompt, generateMusic } from '@percuro/core';
 import { useSessionStore } from '../../../../../store/sessionStore';
 import { S } from './Generating.style';
 

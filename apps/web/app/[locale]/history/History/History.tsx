@@ -2,7 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import type { GoalType } from '@melo/core';
+import type { GoalType } from '@percuro/core';
 import { useSessionStore } from '../../../../store/sessionStore';
 import { useHistoryStore } from '../../../../store/historyStore';
 import { S } from './History.style';

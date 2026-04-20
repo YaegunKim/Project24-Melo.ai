@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { mapToTherapyParams } from '@melo/core';
-import type { MoodType, GoalType } from '@melo/core';
+import { mapToTherapyParams } from '@percuro/core';
+import type { MoodType, GoalType } from '@percuro/core';
 import { useSessionStore } from '../../../../../store/sessionStore';
 import { S } from './BioInput.style';
 
