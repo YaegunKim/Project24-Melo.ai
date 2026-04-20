@@ -1,9 +1,9 @@
 {
-  "name": "@melo/web",
+  "name": "@percuro/web",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,8 +13,8 @@
     "@emotion/react": "^11.13.5",
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.13.5",
-    "@melo/core": "workspace:*",
-    "@melo/design-system": "workspace:*",
+    "@percuro/core": "workspace:*",
+    "@percuro/design-system": "workspace:*",
     "next": "16.2.3",
     "next-intl": "^4.9.0",
     "react": "^18.3.0",
