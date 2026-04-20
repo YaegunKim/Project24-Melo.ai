@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { mapToTherapyParams } from '@percuro/core';
@@ -30,6 +30,29 @@ export function BioInput() {
   const [energyLevel, setEnergyLevel] = useState(5);
   const [mood, setMood] = useState<MoodType>('neutral');
   const [goal, setSelectedGoal] = useState<GoalType | null>(null);
+  const [openInfo, setOpenInfo] = useState<GoalType | null>(null);
+  const [tooltipAlign, setTooltipAlign] = useState<'left' | 'center' | 'right'>('center');
+
+  const handleInfoClick = (e: React.MouseEvent<HTMLButtonElement>, g: GoalType) => {
+    e.stopPropagation();
+    if (openInfo === g) { setOpenInfo(null); return; }
+    const wrap = e.currentTarget.closest('[data-goal-wrap]');
+    const rect = wrap ? wrap.getBoundingClientRect() : e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const align =
+      centerX - 100 < 8 ? 'left' :
+      centerX + 100 > window.innerWidth - 8 ? 'right' :
+      'center';
+    setTooltipAlign(align);
+    setOpenInfo(g);
+  };
+
+  useEffect(() => {
+    if (!openInfo) return;
+    const close = () => setOpenInfo(null);
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [openInfo]);
 
   const canGenerate = goal !== null;
 
@@ -151,15 +174,27 @@ export function BioInput() {
           <S.SectionTitle>{tGoals('title')}</S.SectionTitle>
           <S.GoalsGrid>
             {GOALS.map((g) => (
-              <S.GoalCard
-                key={g}
-                $selected={goal === g}
-                onClick={() => setSelectedGoal(g)}
-              >
-                <S.GoalIcon>{tGoals(`${g}_icon`)}</S.GoalIcon>
-                <S.GoalName>{tGoals(g)}</S.GoalName>
-                <S.GoalDesc>{tGoals(`${g}_desc`)}</S.GoalDesc>
-              </S.GoalCard>
+              <S.GoalCardWrap key={g} data-goal-wrap>
+                <S.GoalCard
+                  $selected={goal === g}
+                  onClick={() => { setSelectedGoal(g); setOpenInfo(null); }}
+                >
+                  <S.GoalIcon>{tGoals(`${g}_icon`)}</S.GoalIcon>
+                  <S.GoalName>{tGoals(g)}</S.GoalName>
+                  <S.GoalDesc>{tGoals(`${g}_desc`)}</S.GoalDesc>
+                </S.GoalCard>
+                <S.GoalInfoButton
+                  onClick={(e) => handleInfoClick(e, g)}
+                  aria-label={`${tGoals(g)} 상세 설명`}
+                >
+                  i
+                </S.GoalInfoButton>
+                {openInfo === g && (
+                  <S.GoalTooltip $align={tooltipAlign}>
+                    {tGoals(`${g}_detail`)}
+                  </S.GoalTooltip>
+                )}
+              </S.GoalCardWrap>
             ))}
           </S.GoalsGrid>
         </S.Section>
@@ -170,6 +205,7 @@ export function BioInput() {
           {canGenerate ? `${tGenerate('button')} →` : `${tGoals('title')} 선택 필요`}
         </S.GenerateButton>
       </S.Footer>
+
     </S.Page>
   );
 }
