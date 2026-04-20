@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd ../.. && pnpm turbo build --filter=@percuro/web",
+  "outputDirectory": ".next",
+  "installCommand": "cd ../.. && pnpm install"
+}
