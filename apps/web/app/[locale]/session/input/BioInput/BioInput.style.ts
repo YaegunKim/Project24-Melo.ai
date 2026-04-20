@@ -183,7 +183,12 @@ export const S = {
     }
   `,
 
+  GoalCardWrap: styled.div`
+    position: relative;
+  `,
+
   GoalCard: styled.button<{ $selected: boolean }>`
+    width: 100%;
     padding: 1.25rem 0.75rem;
     border-radius: 16px;
     border: 1.5px solid ${({ $selected }) => ($selected ? colors.brand.primary : colors.border.subtle)};
@@ -195,6 +200,70 @@ export const S = {
     font-family: ${typography.fontFamily.sans};
 
     &:hover { border-color: ${colors.brand.primary}; transform: translateY(-2px); }
+  `,
+
+  GoalInfoButton: styled.button`
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 1.5px solid ${colors.border.default};
+    background: ${colors.bg.secondary};
+    color: ${colors.text.muted};
+    font-size: 0.65rem;
+    font-weight: ${typography.fontWeight.bold};
+    font-family: ${typography.fontFamily.sans};
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.15s;
+    z-index: 1;
+
+    &:hover {
+      border-color: ${colors.brand.primary};
+      color: ${colors.brand.primary};
+      background: ${colors.bg.card};
+    }
+  `,
+
+  GoalTooltip: styled.div<{ $align: 'left' | 'center' | 'right' }>`
+    position: absolute;
+    bottom: calc(100% + 8px);
+    width: 200px;
+    ${({ $align }) =>
+      $align === 'left'
+        ? 'left: 0;'
+        : $align === 'right'
+          ? 'right: 0;'
+          : 'left: 50%; transform: translateX(-50%);'}
+    background: ${colors.bg.tertiary};
+    border: 1px solid ${colors.border.default};
+    border-radius: 12px;
+    padding: 0.75rem;
+    font-size: ${typography.fontSize.xs};
+    color: ${colors.text.secondary};
+    line-height: 1.6;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      ${({ $align }) =>
+        $align === 'left'
+          ? 'left: 16px;'
+          : $align === 'right'
+            ? 'right: 16px;'
+            : 'left: 50%; transform: translateX(-50%);'}
+      border: 5px solid transparent;
+      border-top-color: ${colors.border.default};
+    }
   `,
 
   GoalIcon: styled.div`
