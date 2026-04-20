@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { BiologicalInput, GoalType, TherapyParams } from '@melo/core';
+import type { BiologicalInput, GoalType, TherapyParams } from '@percuro/core';
 
 interface SessionState {
   bioInput: BiologicalInput | null;

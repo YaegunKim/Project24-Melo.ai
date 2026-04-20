@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { BiologicalInput, GoalType, TherapyParams } from '@melo/core';
+import type { BiologicalInput, GoalType, TherapyParams } from '@percuro/core';
 
 export interface SessionRecord {
   id: string;
@@ -39,6 +39,6 @@ export const useHistoryStore = create<HistoryState>()(
       },
       clearHistory: () => set({ sessions: [] }),
     }),
-    { name: 'melo-history' }
+    { name: 'percuro-history' }
   )
 );
