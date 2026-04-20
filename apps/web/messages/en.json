@@ -73,7 +73,12 @@
     "focus_icon": "🎯",
     "sleep_icon": "🌙",
     "energize_icon": "⚡",
-    "release_icon": "🎭"
+    "release_icon": "🎭",
+    "relax_detail": "Uses the ISO Principle to gradually lower your heart rate and activate the parasympathetic nervous system. Generates slow-tempo music with natural sounds to induce alpha brainwaves.",
+    "focus_detail": "Induces focused states with rhythms and repetitive patterns for beta wave activation. Includes binaural beats to mask background noise.",
+    "sleep_detail": "Uses binaural beats in the delta range (0.5–4 Hz) combined with gradually slowing melodies to gently guide you into sleep.",
+    "energize_detail": "Applies Entrainment technique to progressively raise your energy from its current level to the target. Upbeat rhythms and bright keys recharge your vitality.",
+    "release_detail": "Applies musical catharsis principles for emotional release. Reflects your current emotional state, then gradually guides toward a positive transformation."
   },
   "generate": {
     "button": "Generate Music",
