@@ -1,7 +1,7 @@
 'use client';
 
 import styled from '@emotion/styled';
-import { colors, typography, media } from '@melo/design-system';
+import { colors, typography, media } from '@percuro/design-system';
 
 export const S = {
   Page: styled.div`

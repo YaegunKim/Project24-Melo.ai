@@ -2,7 +2,7 @@
 
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { colors, typography } from '@melo/design-system';
+import { colors, typography } from '@percuro/design-system';
 
 const wave = keyframes`
   0%, 100% { transform: scaleY(0.25); }

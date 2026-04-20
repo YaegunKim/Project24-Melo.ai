@@ -2,7 +2,7 @@
 
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { colors, typography } from '@melo/design-system';
+import { colors, typography } from '@percuro/design-system';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(12px); }

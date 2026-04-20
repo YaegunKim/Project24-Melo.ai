@@ -2,7 +2,7 @@
 
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { colors, typography, media } from '@melo/design-system';
+import { colors, typography, media } from '@percuro/design-system';
 
 const float = keyframes`
   0%, 100% { transform: translateY(0px); }

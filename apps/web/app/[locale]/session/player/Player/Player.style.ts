@@ -2,7 +2,7 @@
 
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { colors, typography, media } from '@melo/design-system';
+import { colors, typography, media } from '@percuro/design-system';
 
 const shimmer = keyframes`
   0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
