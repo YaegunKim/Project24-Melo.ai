@@ -7,7 +7,7 @@ import { CacheProvider } from '@emotion/react';
 
 export function EmotionRegistry({ children }: { children: React.ReactNode }) {
   const [cache] = useState(() => {
-    const c = createCache({ key: 'melo' });
+    const c = createCache({ key: 'percuro' });
     c.compat = true;
     return c;
   });
