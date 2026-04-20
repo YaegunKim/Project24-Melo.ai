@@ -29,10 +29,10 @@ importers:
       '@emotion/styled':
         specifier: ^11.13.5
         version: 11.14.1(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react@18.3.1)
-      '@melo/core':
+      '@percuro/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@melo/design-system':
+      '@percuro/design-system':
         specifier: workspace:*
         version: link:../../packages/design-system
       next:
